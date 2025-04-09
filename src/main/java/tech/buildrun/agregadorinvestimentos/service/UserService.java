@@ -44,7 +44,7 @@ public class UserService {
 
   public void updateUserById(String userId, UpdateUserDTO updateUserDTO){
     var id = UUID.fromString(userId);
-    var userEntity= userRepository.findById(id);
+    var userEntity = userRepository.findById(id);
 
     if(userEntity.isPresent()){
       var user = userEntity.get();
