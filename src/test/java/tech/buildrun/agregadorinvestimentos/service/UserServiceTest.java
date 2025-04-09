@@ -14,6 +14,7 @@ import tech.buildrun.agregadorinvestimentos.entity.User;
 import tech.buildrun.agregadorinvestimentos.repository.UserRepository;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,6 +32,9 @@ class UserServiceTest {
 
   @Captor
   private ArgumentCaptor<User> userArgumentCaptor;
+
+  @Captor
+  private ArgumentCaptor<UUID> uuidArgumentCaptor;
 
   @Nested
   class createUser{
@@ -54,12 +58,12 @@ class UserServiceTest {
               "password"
       );
 
-      doReturn(user).when(userRepository).save(any(User.class));
+      doReturn(user)
+              .when(userRepository)
+              .save(userArgumentCaptor.capture());
 
       var output = userService.createUser(input);
       assertNotNull(output);
-
-      verify(userRepository).save(userArgumentCaptor.capture());
 
       var userCaptured = userArgumentCaptor.getValue();
       assertEquals(input.username(), userCaptured.getUsername());
@@ -70,7 +74,9 @@ class UserServiceTest {
     @Test
     @DisplayName("Should throw exception when error occurs")
     void shouldThrowExceptionWhenErrorOccurs(){
-      doThrow(new RuntimeException()).when(userRepository).save(any());
+      doThrow(new RuntimeException())
+              .when(userRepository)
+              .save(any());
 
       var input = new CreateUserDTO(
               "username",
@@ -81,5 +87,45 @@ class UserServiceTest {
       assertThrows(RuntimeException.class, () -> userService.createUser(input));
     }
 
+  }
+
+  @Nested
+  class getUserById{
+    @Test
+    @DisplayName("Should get user by id with success when optional is present")
+    void shouldGetUserByIdWithSuccessWhenOptionalIsPresent(){
+      var user = new User(
+              UUID.randomUUID(),
+              "username",
+              "email@gmail.com",
+              "password",
+              Instant.now(),
+              null
+      );
+
+      doReturn(Optional.of(user))
+              .when(userRepository)
+              .findById(uuidArgumentCaptor.capture());
+
+      var output = userService.getUserById(user.getUserId().toString());
+
+      assertTrue(output.isPresent());
+      assertEquals(user.getUserId(), uuidArgumentCaptor.getValue());
+    }
+
+    @Test
+    @DisplayName("Should get user by id with success when optional is empty")
+    void shouldGetUserByIdWithSuccessWhenOptionalIsEmpty(){
+      var userId = UUID.randomUUID();
+
+      doReturn(Optional.empty())
+              .when(userRepository)
+              .findById(uuidArgumentCaptor.capture());
+
+      var output = userService.getUserById(userId.toString());
+
+      assertTrue(output.isEmpty());
+      assertEquals(userId, uuidArgumentCaptor.getValue());
+    }
   }
 }
