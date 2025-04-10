@@ -1,5 +1,6 @@
 package tech.buildrun.agregadorinvestimentos.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -12,22 +13,24 @@ public class BillingAddress {
   @Column(name = "account_id")
   private UUID id;
 
+  @OneToOne(cascade = CascadeType.ALL)
+  @MapsId
+  @JoinColumn(name = "account_id")
+  @JsonBackReference
+  private Account account;
+
   @Column(name = "street")
   private String street;
 
   @Column(name = "number")
   private Integer number;
 
-  @OneToOne
-  @MapsId
-  @JoinColumn(name = "account_id")
-  private Account account;
-
   public BillingAddress() {
   }
 
-  public BillingAddress(UUID id, String street, Integer number) {
+  public BillingAddress(UUID id, Account account, String street, Integer number) {
     this.id = id;
+    this.account = account;
     this.street = street;
     this.number = number;
   }
@@ -38,6 +41,14 @@ public class BillingAddress {
 
   public void setId(UUID id) {
     this.id = id;
+  }
+
+  public Account getAccount() {
+    return account;
+  }
+
+  public void setAccount(Account account) {
+    this.account = account;
   }
 
   public String getStreet() {
