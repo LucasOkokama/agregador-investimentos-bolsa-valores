@@ -18,10 +18,10 @@ public class AccountStock {
 
   @ManyToOne
   @JoinColumn(name = "stock_id")
-  @MapsId("stockId")
-  private Stock stock;
+    @MapsId("stockId")
+    private Stock stock;
 
-  @Column(name = "quantity")
+    @Column(name = "quantity")
   private int quantity;
 
   public AccountStock() {
