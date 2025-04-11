@@ -30,7 +30,7 @@ public class Account {
   @Column(name = "description")
   private String description;
 
-  @OneToMany(mappedBy = "account")
+  @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonManagedReference
   private List<AccountStock> accountStocks = new ArrayList<>();
 
