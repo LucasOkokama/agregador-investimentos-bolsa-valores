@@ -3,6 +3,7 @@ package tech.buildrun.agregadorinvestimentos.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import tech.buildrun.agregadorinvestimentos.controller.dto.AccountResponseDto;
 import tech.buildrun.agregadorinvestimentos.controller.dto.CreateAccountDto;
 import tech.buildrun.agregadorinvestimentos.controller.dto.CreateUserDTO;
 import tech.buildrun.agregadorinvestimentos.controller.dto.UpdateUserDTO;
@@ -89,21 +90,29 @@ public class UserService {
     var account = new Account(
             null,
             user,
-            null, // ainda sem billingAddress
+            null,
             createAccountDto.description(),
             new ArrayList<>()
     );
 
-    var accountCreated = accountRepository.save(account);
-
     var billingAddress = new BillingAddress(
             null,
-            accountCreated,
+            account,
             createAccountDto.street(),
             createAccountDto.number()
     );
 
-    billingAddressRepository.save(billingAddress);
+    account.setBillingAddress(billingAddress);
+    accountRepository.save(account);
   }
 
+  public List<AccountResponseDto> listAccounts(String userId) {
+    var user = userRepository.findById(UUID.fromString(userId))
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+    return user.getAccounts()
+            .stream()
+            .map(account -> new AccountResponseDto(account.getAccountId().toString(), account.getDescription()))
+            .toList();
+  }
 }
