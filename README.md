@@ -36,6 +36,15 @@ The project is developed with Java and Spring Boot, which handle the backend log
     </tr>
     <tr>
         <th>
+            Database
+        </th>
+        <td></td>
+        <td>
+            <img alt="MySQL" src="https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white" />
+        </td>
+    </tr>
+    <tr>
+        <th>
             IDE / Editor
         </th>
         <td></td>
