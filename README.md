@@ -58,34 +58,34 @@ The project is developed with Java and Spring Boot, which handle the backend log
 
 # Requirements
 1. Install [`Java JDK`](https://www.oracle.com/java/technologies/downloads/) to run Java applications.
+2. Install [`MySQL`](https://www.mysql.com/downloads/) to manage the tables.
+3. Install [`Docker`](https://www.docker.com/) to create a container to run MySQL.
 
    
 
 # How to run locally (command line)
 1. Run a `git clone` of the repository:
 ```
-git clone https://github.com/LucasOkokama/pexels-image-search.git
+git clone https://github.com/LucasOkokama/agregador-investimentos-bolsa-valores
 ```
-2. Open the `pexels-image-search` folder and install the `dependencies`:
+2. Start the `Docker application` and `run the container` with the MySQL image:
 ```
-cd pexels-image-search
-npm install
+cd agregador-investimentos-bolsa-valores
+docker compose up
 ```
-3. Create a [`Pexels account`](https://www.pexels.com/api/) and get an `API key`. Next, in the root folder, create a `.env` file and add your API key as follows:
+3. Open MySQL Workbench and `add a new user account` with:
 ```
-VITE_PEXELS_API_KEY=<YOUR_API_KEY_HERE>
+MYSQL_USER=springuser
+MYSQL_PASSWORD=ThePassword
 ```
-4. `Run the project`:
-```
-npm run dev
-```
-5. Access `localhost` to open the website:
-```
-http://localhost:5173
-```
+4. Create a `new connection` using the user account created.
+5. Get your [`Brapi API Key`](https://brapi.dev/) and add it as an `environment variable` in IntelliJ IDEA:
+6. Run `AgregadorinvestimentosApplication.java`.
+7. `Make some requests` using Postman or similar tools.
 
 # References
-This project was inspired by the [`Flashdash`](https://flashdash-nine.vercel.app/) website created by [`Paulo Victor`](https://github.com/paulopbi).
+This project was created based on the video '[`[ADI #1] - Creating a CRUD with Java Spring Boot and MySQL`](https://www.youtube.com/watch?v=Tnl4YnB6E54)' (and its subsequent episodes) produced by [`Build & Run`](https://github.com/buildrun-tech). The complete project can be found in the repository [`buildrun-investment-aggregator`](https://github.com/buildrun-tech/buildrun-agregador-de-investimentos/tree/crud-usuarios).
+
 
 
 # License
