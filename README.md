@@ -79,12 +79,12 @@ MYSQL_USER=springuser
 MYSQL_PASSWORD=ThePassword
 ```
 4. Create a `new connection` using the user account created.
-5. Get your [`Brapi API Key`](https://brapi.dev/) and add it as an `environment variable` in IntelliJ IDEA:
+5. Get your [`Brapi API Key`](https://brapi.dev/) and add it as an `environment variable` in IntelliJ IDEA.
 6. Run `AgregadorinvestimentosApplication.java`.
 7. `Make some requests` using Postman or similar tools.
 
 # References
-This project was created based on the video '[`[ADI #1] - Creating a CRUD with Java Spring Boot and MySQL`](https://www.youtube.com/watch?v=Tnl4YnB6E54)' (and its subsequent episodes) produced by [`Build & Run`](https://github.com/buildrun-tech). The complete project can be found in the repository [`buildrun-investment-aggregator`](https://github.com/buildrun-tech/buildrun-agregador-de-investimentos/tree/crud-usuarios).
+This project was created based on the video [`[ADI #1] - Creating a CRUD with Java Spring Boot and MySQL`](https://www.youtube.com/watch?v=Tnl4YnB6E54) (and its subsequent episodes) produced by [`Build & Run`](https://github.com/buildrun-tech). The complete project can be found in the repository [`buildrun-investment-aggregator`](https://github.com/buildrun-tech/buildrun-agregador-de-investimentos/tree/crud-usuarios).
 
 
 
