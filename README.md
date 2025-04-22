@@ -45,6 +45,15 @@ The project is developed with Java and Spring Boot, which handle the backend log
     </tr>
     <tr>
         <th>
+            Unit Testing
+        </th>
+        <td></td>
+        <td>
+            <img alt="JUnit" src="https://img.shields.io/badge/JUnit-_?style=for-the-badge&logo=junit5&logoColor=%23fff&color=%23DC524A" />
+        </td>
+    </tr>
+    <tr>
+        <th>
             IDE / Editor
         </th>
         <td></td>
